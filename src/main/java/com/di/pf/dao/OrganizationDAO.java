@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author avg 4444444444444444444444
+ * @author avg
  */
 public interface OrganizationDAO extends GenericDAO<Organization, Integer>{
      //public Organization find(Integer id);
