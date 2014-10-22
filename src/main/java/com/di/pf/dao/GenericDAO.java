@@ -9,7 +9,7 @@ package com.di.pf.dao;
  *
  * @author avg
  * @param <T>
- * @param <ID>
+ * @param <ID> fdgdfgdfgdf
  */
 public interface GenericDAO<T, ID> {
 
