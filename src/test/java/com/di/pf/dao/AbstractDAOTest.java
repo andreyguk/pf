@@ -23,7 +23,7 @@ public abstract class AbstractDAOTest extends AbstractTransactionalJUnit4SpringC
 
     @Autowired(required = true)
     protected OrganizationDAO organizationDAO;
-//    @Autowired(required = true)
-//    protected UsersDAO usersDAO;
+    @Autowired(required = true)
+    protected UsersDAO usersDAO;
 
 }

@@ -23,11 +23,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author avg
  */
 @Entity
-@Table(name = "users")
+@Table(name = "model.users")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")})
 public class Users implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -140,5 +141,5 @@ public class Users implements Serializable {
     public String toString() {
         return "com.di.pf.domain.Users[ id=" + id + " ]";
     }
-    
+
 }

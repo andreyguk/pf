@@ -28,11 +28,8 @@ public class OrganizationDAOImpl extends GenericDAOImpl<Organization, Integer> i
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public List<Organization> findAll() {
-
         TypedQuery<Organization> query = em.createNamedQuery("Organization.findAll", Organization.class);
-        return query.getResultList();
-        //return em.createNamedQuery("Organization.findAll").getResultList();
-        //return em.createQuery("SELECT o FROM Organization o", Organization.class).getResultList();
+        return query.getResultList();       
     }
 
 }
