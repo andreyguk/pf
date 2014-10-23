@@ -12,12 +12,13 @@ import java.util.List;
  *
  * @author avg
  */
-public interface OrganizationDAO extends GenericDAO<Organization, Integer>{
-     //public Organization find(Integer id);
+public interface OrganizationDAO extends GenericDAO<Organization, Integer> {
+
+    //public Organization find(Integer id);
+
     public List<Organization> findAll();
 
     //public void persist(Organization organization);
     //public Organization merge(Organization organization);
     //public void remove(Organization organization);
-   
 }

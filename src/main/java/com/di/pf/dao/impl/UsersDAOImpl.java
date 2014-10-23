@@ -5,7 +5,6 @@
  */
 package com.di.pf.dao.impl;
 
-import com.di.pf.dao.GenericDAOImpl;
 import java.io.Serializable;
 import com.di.pf.domain.Users;
 import com.di.pf.dao.UsersDAO;
@@ -23,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author avg
  */
-@Repository("usersDAO")
+//@Repository("usersDAO")
 @Transactional
 public class UsersDAOImpl extends GenericDAOImpl<Users, Integer> implements UsersDAO {
 
