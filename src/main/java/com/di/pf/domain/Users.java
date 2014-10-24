@@ -26,7 +26,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "model.users")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")})
+    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
+    @NamedQuery(name = "Users.findById", query = "SELECT u FROM Users u WHERE u.id = :id"),
+    @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username"),
+    @NamedQuery(name = "Users.findByLastname", query = "SELECT u FROM Users u WHERE u.lastname = :lastname"),
+    @NamedQuery(name = "Users.findByFirstname", query = "SELECT u FROM Users u WHERE u.firstname = :firstname"),
+    @NamedQuery(name = "Users.findByMiddlename", query = "SELECT u FROM Users u WHERE u.middlename = :middlename"),
+    @NamedQuery(name = "Users.findByShortfio", query = "SELECT u FROM Users u WHERE u.shortfio = :shortfio"),
+    @NamedQuery(name = "Users.findByFullfio", query = "SELECT u FROM Users u WHERE u.fullfio = :fullfio"),
+    @NamedQuery(name = "Users.findByRoleStr", query = "SELECT u FROM Users u WHERE u.roleStr = :roleStr")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,6 +61,9 @@ public class Users implements Serializable {
     @Size(max = 250)
     @Column(name = "fullfio")
     private String fullfio;
+    @Size(max = 250)
+    @Column(name = "roleStr")
+    private String roleStr;
 
     public Users() {
     }
@@ -117,6 +128,18 @@ public class Users implements Serializable {
         this.fullfio = fullfio;
     }
 
+    public String getRoleStr() {
+        return roleStr;
+    }
+
+    public void setRoleStr(String roleStr) {
+        this.roleStr = roleStr;
+    }
+
+    public boolean isAdmin() {
+        return roleStr == null ? false : roleStr.equals("admin");
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -139,7 +162,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "com.di.pf.domain.Users[ id=" + id + " ]";
+        return "com.di.pf.domain.Users_1[ id=" + id + " ]";
     }
 
 }

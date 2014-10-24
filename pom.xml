@@ -190,7 +190,8 @@
                 <configuration>
                     <skipTests>false</skipTests>
                     <includes>
-                        <include>**/dao/*Test.java</include>                       
+                        <include>**/dao/*Test.java</include>   
+                        <include>**/service/*Test.java</include>                        
                     </includes>
                     <argLine>-javaagent:target/lib/spring-instrument-${spring.version}.jar</argLine>
                 </configuration>

@@ -45,8 +45,8 @@
 
     <!-- Scan for Repository/Service annotations -->
     <context:component-scan base-package="com.di.pf.dao" />
-    <!--    <context:component-scan base-package="com.di.pf.service" />
-    <context:component-scan base-package="com.di.pf.web" />-->
+    <context:component-scan base-package="com.di.pf.service" />
+    <!--<context:component-scan base-package="com.di.pf.web" />-->
     <!-- enable the configuration of transactional behavior based on annotations -->
     <tx:annotation-driven />
     
