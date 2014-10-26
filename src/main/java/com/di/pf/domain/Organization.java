@@ -7,6 +7,7 @@ package com.di.pf.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.json.JsonObjectBuilder;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Organization.findAll", query = "SELECT o FROM Organization o")})
-public class Organization implements Serializable {
+public class Organization extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -228,4 +229,8 @@ public class Organization implements Serializable {
         return "com.di.pf.domain.Organization[ id=" + id + " ]";
     }
 
+    @Override
+    public void addJson(JsonObjectBuilder builder) {
+        builder.add("orgId", id).add("orgName", name);
+    }
 }

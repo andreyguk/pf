@@ -25,4 +25,7 @@ public interface UsersService {
     public Result<Users> find(Integer id, String actionUser);
 
     public Result<List<Users>> findAll(String actionUser);
+
+    public Result<Users> findByUsernamePassword(String username, String password);
+
 }

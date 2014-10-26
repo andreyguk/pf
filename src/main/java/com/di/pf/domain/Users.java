@@ -6,6 +6,7 @@
 package com.di.pf.domain;
 
 import java.io.Serializable;
+import javax.json.JsonObjectBuilder;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,7 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Users.findByShortfio", query = "SELECT u FROM Users u WHERE u.shortfio = :shortfio"),
     @NamedQuery(name = "Users.findByFullfio", query = "SELECT u FROM Users u WHERE u.fullfio = :fullfio"),
     @NamedQuery(name = "Users.findByRoleStr", query = "SELECT u FROM Users u WHERE u.roleStr = :roleStr")})
-public class Users implements Serializable {
+public class Users extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -164,5 +165,8 @@ public class Users implements Serializable {
     public String toString() {
         return "com.di.pf.domain.Users_1[ id=" + id + " ]";
     }
-
+@Override
+    public void addJson(JsonObjectBuilder builder) {
+        builder.add("userId", id).add(" username", username);
+    }
 }
