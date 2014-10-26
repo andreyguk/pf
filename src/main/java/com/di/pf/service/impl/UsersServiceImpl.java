@@ -15,7 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import com.di.pf.service.AbstactService;
+import org.springframework.stereotype.Service;
 
+@Transactional
+@Service("usersService")
 public class UsersServiceImpl extends AbstactService implements UsersService {
 
     @Autowired

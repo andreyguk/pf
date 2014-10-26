@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.di.pf.web.config;
+package com.di.pf.web;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +14,7 @@ import com.di.pf.web.security.UserInSessionInterceptor;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan("com.gieman.tttracker.web")
+@ComponentScan("com.di.pf.web")
 
 public class WebAppConfig extends WebMvcConfigurerAdapter {
 

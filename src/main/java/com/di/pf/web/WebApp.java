@@ -5,16 +5,13 @@
  */
 package com.di.pf.web;
 
-import com.di.pf.web.config.WebAppConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebApp extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{
-            "/pf/*"
-        };
+        return new String[]{"/pf/*"};
     }
 
     @Override

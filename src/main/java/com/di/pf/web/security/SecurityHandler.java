@@ -29,22 +29,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SecurityHandler extends AbstractHandler {
 
     @Autowired
-    protected UsersService usersService;
+    protected UsersService us;
 
-   @RequestMapping(value = "/logon", method = RequestMethod.POST, produces = {"application/json"})
+    @RequestMapping(value = "/logon", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
-    public String logon(
-            @RequestParam(value = "username", required = true) String username,
-            @RequestParam(value = "password", required = true) String password,
-            HttpServletRequest request) {
+    public String logon(@RequestParam(value = "username", required = true) String username, @RequestParam(value = "password", required = true) String password, HttpServletRequest request) {
 
-        Result<Users> ar = usersService.findByUsernamePassword(username, password);
+        Result<Users> ar = us.findByUsernamePassword(username, password);
 
         if (ar.isSuccess()) {
 
             Users user = ar.getData();
             HttpSession session = request.getSession(true);
-            session.setAttribute(SESSION_ATTRIB_USER, user);            
+            session.setAttribute(SESSION_ATTRIB_USER, user);
             return getJsonSuccessData(user);
 
         } else {
@@ -62,4 +59,4 @@ public class SecurityHandler extends AbstractHandler {
         session.removeAttribute(SESSION_ATTRIB_USER);
         return getJsonSuccessMsg("User logged out...");
     }
-    }
+}
