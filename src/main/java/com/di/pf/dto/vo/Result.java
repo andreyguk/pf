@@ -17,17 +17,27 @@ public class Result<T> implements Serializable {
     final private boolean success;
     final private T data;
     final private String msg;
+    final private Long total;
 
     public Result(boolean success, T data) {
         this.success = success;
         this.data = data;
         this.msg = null;
+        this.total = null;
     }
 
     public Result(boolean success, String msg) {
         this.success = success;
         this.data = null;
         this.msg = msg;
+        this.total = null;
+    }
+
+    public Result(boolean success, T data, Long count) {
+        this.success = success;
+        this.data = data;
+        this.msg = null;
+        this.total = count;
     }
 
     public boolean isSuccess() {
@@ -38,6 +48,10 @@ public class Result<T> implements Serializable {
         return data;
     }
 
+    public Long getCount() {
+        return total;
+    }
+
     public String getMsg() {
         return msg;
     }
@@ -45,9 +59,11 @@ public class Result<T> implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("\"Result{\"");
+
         sb.append("success=").append(success);
+        sb.append(", total=").append(total);
         sb.append(", msg=").append(msg);
-        sb.append(", data=").append(msg);
+        sb.append(", data=");
 
         if (data == null) {
             sb.append("null");

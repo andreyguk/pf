@@ -48,7 +48,7 @@ public class UsersDAOImpl extends GenericDAOImpl<Users, Integer> implements User
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public Users findByUsernamePassword(String username, String password) {
-        List<Users> users = em.createNamedQuery("Users.findByUsernamePassword").setParameter("username", username).setParameter("password", password).getResultList();
+        List<Users> users = em.createNamedQuery("Users.findByUsername").setParameter("username", username).getResultList();
         return (users.size() == 1 ? users.get(0) : null);
     }
 

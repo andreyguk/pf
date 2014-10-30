@@ -13,7 +13,7 @@
             <name>JSESSIONID_PF</name>
         </cookie-config>
     </session-config>
-    <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+    <welcome-file-list>        
+        <welcome-file>security/login.html</welcome-file>
     </welcome-file-list>
 </web-app>

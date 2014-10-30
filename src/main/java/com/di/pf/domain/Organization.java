@@ -6,6 +6,7 @@
 package com.di.pf.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.json.JsonObjectBuilder;
 import javax.persistence.Basic;
@@ -31,7 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "model.organization")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Organization.findAll", query = "SELECT o FROM Organization o")})
+    @NamedQuery(name = "Organization.findAll", query = "SELECT o FROM Organization o "),
+    @NamedQuery(name = "Organization.countAll", query = "SELECT count(o) FROM Organization o")})
 public class Organization extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
@@ -231,6 +233,7 @@ public class Organization extends AbstractEntity {
 
     @Override
     public void addJson(JsonObjectBuilder builder) {
-        builder.add("orgId", id).add("orgName", name);
+
+        builder.add("id", id).add("name", name).add("orgCode", code);
     }
 }

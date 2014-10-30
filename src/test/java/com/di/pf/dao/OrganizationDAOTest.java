@@ -26,7 +26,7 @@ public class OrganizationDAOTest extends AbstractDAOTest {
     @Test
     public void testFind() throws Exception {
         logger.debug("\nSTARTED testFind()\n");
-        List<Organization> allItems = organizationDAO.findAll();
+        List<Organization> allItems = organizationDAO.findAll(10,20);
         assertTrue(allItems.size() > 0);
         // get the first item in the list
         Organization c1 = allItems.get(0);
@@ -49,7 +49,7 @@ public class OrganizationDAOTest extends AbstractDAOTest {
 
         if (rowCount > 0) {
 
-            List<Organization> allItems = organizationDAO.findAll();
+            List<Organization> allItems = organizationDAO.findAll(10,20);
             assertTrue("Organization.findAll list not equal to row count of table organization", rowCount == allItems.size());
 
         } else {
@@ -91,7 +91,7 @@ public class OrganizationDAOTest extends AbstractDAOTest {
         logger.debug("\nSTARTED testMerge()\n");
         final String NEW_NAME = "Merge Test Company New Name";
 
-        Organization c = organizationDAO.findAll().get(0);
+        Organization c = organizationDAO.findAll(10,20).get(0);
         c.setName(NEW_NAME);
 
         c = organizationDAO.megre(c);
@@ -111,11 +111,11 @@ public class OrganizationDAOTest extends AbstractDAOTest {
     public void testRemove() throws Exception {
 
         logger.debug("\nSTARTED testRemove()\n");
-        Organization c = organizationDAO.findAll().get(0);
+        Organization c = organizationDAO.findAll(10,20).get(0);
 
         organizationDAO.remove(c);
 
-        List<Organization> allItems = organizationDAO.findAll();
+        List<Organization> allItems = organizationDAO.findAll(10,20);
 
         assertTrue("Deleted company may not be in findAll List", !allItems.contains(c));
 

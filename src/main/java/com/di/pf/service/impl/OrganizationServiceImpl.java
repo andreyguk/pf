@@ -93,12 +93,18 @@ public class OrganizationServiceImpl extends AbstactService implements Organizat
         }
     }
 
+    /**
+     *
+     * @param actionUser
+     * @param start
+     * @param limit
+     * @return
+     */
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
-    public Result<List<Organization>> findAll(String actionUser) {
+    public Result<List<Organization>> findAll(String actionUser, Integer start, Integer limit) {
         if (isValidUser(actionUser)) {
-
-            return ResultFactory.getSuccessResult(organizationDAO.findAll());
+            return ResultFactory.getSuccessResult(organizationDAO.findAll(start, limit), organizationDAO.count());
 
         } else {
 

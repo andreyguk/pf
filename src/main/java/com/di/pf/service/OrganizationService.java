@@ -24,5 +24,5 @@ public interface OrganizationService {
 
     public Result<Organization> find(Integer id, String actionUser);
 
-    public Result<List<Organization>> findAll(String actionUser);
+    public Result<List<Organization>> findAll(String actionUser, Integer start, Integer limit);
 }

@@ -16,8 +16,15 @@ public interface OrganizationDAO extends GenericDAO<Organization, Integer> {
 
     //public Organization find(Integer id);
 
-    public List<Organization> findAll();
+    /**
+     *
+     * @param start
+     * @param limit
+     * @return
+     */
+        public List<Organization> findAll(Integer start, Integer limit);
 
+    public Long count();
     //public void persist(Organization organization);
     //public Organization merge(Organization organization);
     //public void remove(Organization organization);

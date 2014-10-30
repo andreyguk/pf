@@ -78,17 +78,17 @@ public class OrganizationHandler extends AbstractHandler {
 
      }
      }*/
-    @RequestMapping(value = "/findAll", method = RequestMethod.GET, produces = {"application/json"})
+    @RequestMapping(value = "/findAll", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
     public String findAll(HttpServletRequest request) {
 
         Users sessionUser = getSessionUser(request);
-
-        Result<List<Organization>> ar = organizationService.findAll(sessionUser.getUsername());
+        Integer start = Integer.parseInt(request.getParameter("start"));
+        Integer limitg = Integer.parseInt(request.getParameter("limit"));
+        Result<List<Organization>> ar = organizationService.findAll(sessionUser.getUsername(), start, limitg);
 
         if (ar.isSuccess()) {
-
-            return getJsonSuccessData(ar.getData());
+            return getJsonSuccessData(ar.getData(), ar.getCount());
 
         } else {
 

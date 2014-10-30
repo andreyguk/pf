@@ -6,6 +6,7 @@
 package com.di.pf.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.json.JsonObjectBuilder;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -165,8 +166,10 @@ public class Users extends AbstractEntity {
     public String toString() {
         return "com.di.pf.domain.Users_1[ id=" + id + " ]";
     }
-@Override
+
+    @Override
     public void addJson(JsonObjectBuilder builder) {
-        builder.add("userId", id).add(" username", username);
+        builder.add("id", id).add("userName", username).add("fio", shortfio).add("workplace", "workplace").add("workplaceName", "workplaceName").add("roleName", roleStr);
+
     }
 }

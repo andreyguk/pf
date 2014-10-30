@@ -27,9 +27,15 @@ public class OrganizationDAOImpl extends GenericDAOImpl<Organization, Integer> i
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-    public List<Organization> findAll() {
+    public List<Organization> findAll(Integer start, Integer limit) {
         TypedQuery<Organization> query = em.createNamedQuery("Organization.findAll", Organization.class);
-        return query.getResultList();       
+        return query.setFirstResult(start).setMaxResults(limit).getResultList();
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public Long count() {
+        return em.createNamedQuery("Organization.countAll", Long.class).getSingleResult();
     }
 
 }

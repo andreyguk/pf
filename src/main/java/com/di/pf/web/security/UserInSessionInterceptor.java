@@ -34,6 +34,7 @@ public class UserInSessionInterceptor extends HandlerInterceptorAdapter {
             response.getOutputStream().write(json.getBytes());
             return false;
         } else {
+           
             return true;
         }
     }

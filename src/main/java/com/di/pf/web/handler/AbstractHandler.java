@@ -28,10 +28,11 @@ public class AbstractHandler {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public static String getJsonSuccessData(List<? extends JsonItem> results) {
+    public static String getJsonSuccessData(List<? extends JsonItem> results, Long count) {
 
         final JsonObjectBuilder builder = Json.createObjectBuilder();
         builder.add("success", true);
+        builder.add("total", count);
 
         final JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
 

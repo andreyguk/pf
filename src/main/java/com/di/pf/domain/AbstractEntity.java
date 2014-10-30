@@ -19,7 +19,6 @@ public abstract class AbstractEntity implements Serializable, JsonItem {
 
     @Override
     public JsonObject toJson() {
-
         JsonObjectBuilder builder = Json.createObjectBuilder();
         addJson(builder);
         return builder.build();

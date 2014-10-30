@@ -28,7 +28,7 @@ public class OrganizationServiceTest extends AbstractServiceTest {
     public void testFind() throws Exception {
         
         logger.debug("\nSTARTED testFind()\n");
-        Result<List<Organization>> allItems = organizationService.findAll(TEST_USERNAME);
+        Result<List<Organization>> allItems = organizationService.findAll(TEST_USERNAME,10,20);
         
         assertTrue(allItems.getData().size() > 0);
 
@@ -56,7 +56,7 @@ public class OrganizationServiceTest extends AbstractServiceTest {
         
         if (rowCount > 0) {
             
-            Result<List<Organization>> allItems = organizationService.findAll(TEST_USERNAME);
+            Result<List<Organization>> allItems = organizationService.findAll(TEST_USERNAME,10,20);
             assertTrue("Organization.findAll list not equal to row count of table ttt_company", rowCount == allItems.getData().size());
             
         } else {
@@ -96,7 +96,7 @@ public class OrganizationServiceTest extends AbstractServiceTest {
         logger.debug("\nSTARTED testUpdate()\n");
         final String NEW_NAME = "Update Test Company New Name";
         
-        Result<List<Organization>> ar1 = organizationService.findAll(TEST_USERNAME);
+        Result<List<Organization>> ar1 = organizationService.findAll(TEST_USERNAME,10,20);
         Organization c = ar1.getData().get(0);
         c.setName(NEW_NAME);
 
@@ -120,7 +120,7 @@ public class OrganizationServiceTest extends AbstractServiceTest {
     public void testRemove() throws Exception {
         
         logger.debug("\nSTARTED testRemove()\n");
-        Result<List<Organization>> ar1 = organizationService.findAll(TEST_USERNAME);
+        Result<List<Organization>> ar1 = organizationService.findAll(TEST_USERNAME,10,20);
         Organization c = ar1.getData().get(0);
         
         Result<Organization> ar = organizationService.remove(c.getId(), TEST_USERNAME);

@@ -11,7 +11,10 @@ import com.di.pf.service.UsersService;
 import com.di.pf.dto.vo.Result;
 import static com.di.pf.web.handler.AbstractHandler.getJsonErrorMsg;
 import static com.di.pf.web.security.SecurityHelper.SESSION_ATTRIB_USER;
+import static com.di.pf.web.security.SecurityHelper.getSessionUser;
+import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,30 +36,44 @@ public class SecurityHandler extends AbstractHandler {
 
     @RequestMapping(value = "/logon", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
-    public String logon(@RequestParam(value = "username", required = true) String username, @RequestParam(value = "password", required = true) String password, HttpServletRequest request) {
+    public void logon(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        Result<Users> ar = us.findByUsernamePassword(username, password);
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+        String contextPath = request.getContextPath();
+        Result<Users> ar = us.findByUsernamePassword(login, password);
 
         if (ar.isSuccess()) {
-
             Users user = ar.getData();
             HttpSession session = request.getSession(true);
             session.setAttribute(SESSION_ATTRIB_USER, user);
-            return getJsonSuccessData(user);
+            response.sendRedirect(response.encodeRedirectURL("/index.html"));
+            //return getJsonSuccessData(user);
 
         } else {
+            response.sendRedirect(response.encodeRedirectURL("/index.html"));
+            //return getJsonErrorMsg(ar.getMsg());
 
-            return getJsonErrorMsg(ar.getMsg());
+        }
+    }
 
+    @RequestMapping(value = "/checkauth", method = RequestMethod.POST, produces = {"application/json"})
+    @ResponseBody
+    public String checkauth(HttpServletRequest request) {
+
+        Users user = getSessionUser(request);
+        if (user != null) {
+            return getJsonSuccessData(user);
+        } else {
+            return getJsonMsg("user not loggined", false);
         }
     }
 
     @RequestMapping(value = "/logout", produces = {"application/json"})
     @ResponseBody
     public String logout(HttpServletRequest request) {
-
         HttpSession session = request.getSession(true);
         session.removeAttribute(SESSION_ATTRIB_USER);
-        return getJsonSuccessMsg("User logged out...");
+        return getJsonMsg("session is end", true);
     }
 }
