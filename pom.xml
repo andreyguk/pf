@@ -17,6 +17,8 @@
         <slf4j.version>1.7.7</slf4j.version>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.build.timestamp.format>dd-MMM-yyyy HH:mm</maven.build.timestamp.format>
+
     </properties>
     
     <dependencies>
@@ -144,6 +146,16 @@
                 <version>2.3</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/webapp/ext/packages/ext-theme-classic/build/resources</directory>
+                            <targetPath>resources</targetPath>
+                            <excludes>
+                                <exclude>ext-theme-classic-all-*</exclude>
+                            </excludes>                            
+                        </resource>                            
+                    </webResources>       
+                    <packagingExcludes>.sencha/**,app/**,sass/**,overrides/**,build/**,ext/**,app.json,bootstrap.css,bootstrap.js,build.xml, index.html,app.js</packagingExcludes> 
                 </configuration>
             </plugin>
             <plugin>
@@ -197,7 +209,36 @@
                     </includes>
                     <argLine>-javaagent:target/lib/spring-instrument-${spring.version}.jar</argLine>
                 </configuration>
-            </plugin>            
+            </plugin>  
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>maven-replacer-plugin</artifactId>
+                <version>1.3</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <ignoreMissingFile>false</ignoreMissingFile>
+                            <file>src/main/webapp/security/login.html</file>
+                            <regex>false</regex>
+                            <replacements>
+                                <replacement>
+                                    <token>$BUILD_DATE$</token>
+                                    <value>${maven.build.timestamp}</value>
+                                </replacement>
+                                <replacement>
+                                    <token>$BUILD_VERSION$</token>
+                                    <value>${project.version}</value>
+                                </replacement>
+                            </replacements>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+          
 
         </plugins>
     </build>

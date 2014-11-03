@@ -84,8 +84,8 @@ public class OrganizationHandler extends AbstractHandler {
 
         Users sessionUser = getSessionUser(request);
         Integer start = Integer.parseInt(request.getParameter("start"));
-        Integer limitg = Integer.parseInt(request.getParameter("limit"));
-        Result<List<Organization>> ar = organizationService.findAll(sessionUser.getUsername(), start, limitg);
+        Integer limit = Integer.parseInt(request.getParameter("limit"));
+        Result<List<Organization>> ar = organizationService.findAll(sessionUser.getUsername(), start, limit);
 
         if (ar.isSuccess()) {
             return getJsonSuccessData(ar.getData(), ar.getCount());
