@@ -103,7 +103,7 @@ Ext.define('pf.view.form.card.CreateBlank', {
                                             xtype: 'combobox',
                                             fieldLabel: loc.lblApplicantType,
                                             itemId: 'applicantTypeId',
-                                            //store: Ext.create('pf.store.common.ApplicantTypes'),
+                                            store: Ext.create('pf.store.common.ApplicantTypes'),
                                             queryMode: 'local',
                                             minChars: 3,
                                             editable: false,

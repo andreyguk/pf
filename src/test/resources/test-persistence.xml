@@ -3,7 +3,9 @@
     <persistence-unit name="pf" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>com.di.pf.domain.Organization</class>      
-        <class>com.di.pf.domain.Users</class>  
+        <class>com.di.pf.domain.Users</class> 
+        <class>com.di.pf.domain.common.ApplicantType</class>  
+        <class>com.di.pf.domain.common.BuildingMainClass</class>  
         <properties>
             <property name="eclipselink.logging.level" value="WARNING"/>
         </properties>

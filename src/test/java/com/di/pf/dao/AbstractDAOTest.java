@@ -5,6 +5,7 @@
  */
 package com.di.pf.dao;
 
+import com.di.pf.dao.common.simple.CommonDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,5 +26,9 @@ public abstract class AbstractDAOTest extends AbstractTransactionalJUnit4SpringC
     protected OrganizationDAO organizationDAO;
     @Autowired(required = true)
     protected UsersDAO usersDAO;
+    @Autowired(required = true)
+    protected CommonDAO commonDAO;
+
+    
 
 }

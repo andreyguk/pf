@@ -40,7 +40,6 @@ public class SecurityHandler extends AbstractHandler {
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        String contextPath = request.getContextPath();
         Result<Users> ar = us.findByUsernamePassword(login, password);
 
         if (ar.isSuccess()) {
@@ -48,11 +47,8 @@ public class SecurityHandler extends AbstractHandler {
             HttpSession session = request.getSession(true);
             session.setAttribute(SESSION_ATTRIB_USER, user);
             response.sendRedirect(response.encodeRedirectURL("/index.html"));
-            //return getJsonSuccessData(user);
-
         } else {
             response.sendRedirect(response.encodeRedirectURL("/index.html"));
-            //return getJsonErrorMsg(ar.getMsg());
 
         }
     }

@@ -7,64 +7,68 @@ package com.di.pf.dto.vo;
 
 import java.io.Serializable;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author avg
  */
 public class Result<T> implements Serializable {
-
+    
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
     final private boolean success;
     final private T data;
     final private String msg;
     final private Long total;
-
+    
     public Result(boolean success, T data) {
         this.success = success;
         this.data = data;
         this.msg = null;
         this.total = null;
     }
-
+    
     public Result(boolean success, String msg) {
         this.success = success;
         this.data = null;
         this.msg = msg;
         this.total = null;
     }
-
+    
     public Result(boolean success, T data, Long count) {
         this.success = success;
         this.data = data;
         this.msg = null;
         this.total = count;
     }
-
+    
     public boolean isSuccess() {
         return success;
     }
-
+    
     public T getData() {
         return data;
     }
-
+    
     public Long getCount() {
         return total;
     }
-
+    
     public String getMsg() {
         return msg;
     }
-
+    
     @Override
     public String toString() {
+        logger.debug("data=" + data);
         StringBuilder sb = new StringBuilder("\"Result{\"");
-
+        
         sb.append("success=").append(success);
         sb.append(", total=").append(total);
         sb.append(", msg=").append(msg);
         sb.append(", data=");
-
+        
         if (data == null) {
             sb.append("null");
         } else if (data instanceof List) {
@@ -75,14 +79,14 @@ public class Result<T> implements Serializable {
                 Object firstItem = castList.get(0);
                 sb.append("List of").append(firstItem.getClass());
             }
-
+            
         } else {
             sb.append(data.toString());
         }
         sb.append("}");
         return sb.toString();
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 3;
@@ -90,7 +94,7 @@ public class Result<T> implements Serializable {
         hash = 41 * hash + (this.data != null ? this.data.hashCode() : 0);
         return hash;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -102,5 +106,5 @@ public class Result<T> implements Serializable {
         final Result<?> other = (Result<?>) obj;
         return this.success == other.success;
     }
-
+    
 }
