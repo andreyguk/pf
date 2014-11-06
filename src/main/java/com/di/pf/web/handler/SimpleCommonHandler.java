@@ -38,6 +38,13 @@ public class SimpleCommonHandler extends AbstractHandler {
     @ResponseBody
     public String findAll(HttpServletRequest request) {
 
+        String name = "";
+
+        if (request.getParameter("filter") != null) {
+            JsonObject filter = parseJsonObject(request.getParameter("filter"));
+            name = filter.getString("name");
+        }
+
         String username = getSessionUser(request).getUsername();
         Integer start = Integer.parseInt(request.getParameter("start"));
         Integer limit = Integer.parseInt(request.getParameter("limit"));
@@ -45,15 +52,15 @@ public class SimpleCommonHandler extends AbstractHandler {
 
         switch (classname) {
             case "ApplicantType":
-                return getApplicantType(username, start, limit);
+                return getApplicantType(username, start, limit, name);
             default:
                 return null;
         }
 
     }
 
-    public String getApplicantType(String username, Integer start, Integer limit) {
-        Result<List<ApplicantType>> ar = commonService.getApplicantType(username, start, limit);
+    public String getApplicantType(String username, Integer start, Integer limit, String name) {
+        Result<List<ApplicantType>> ar = commonService.getApplicantType(username, start, limit, name);
         if (ar.isSuccess()) {
             return getJsonSuccessData(ar.getData(), ar.getCount());
         } else {

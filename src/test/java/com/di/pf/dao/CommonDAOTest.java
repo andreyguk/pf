@@ -37,7 +37,7 @@ public class CommonDAOTest extends AbstractDAOTest {
         logger.debug("4545454545=" + commonDAO.getApplicantTypeCount());
         if (rowCount > 0) {
 
-            List<ApplicantType> allItems = commonDAO.getApplicantType(0, 10);
+            List<ApplicantType> allItems = commonDAO.getApplicantType(0, 10,null);
 
             assertTrue("Organization.findAll list not equal to row count of table organization", rowCount == allItems.size());
 
@@ -55,7 +55,7 @@ public class CommonDAOTest extends AbstractDAOTest {
         logger.debug("33333333=" + rowCount);
         if (rowCount > 0) {
 
-            List<BuildingMainClass> allItems = commonDAO.getBuildingMainClass(0, 10);
+            List<BuildingMainClass> allItems = commonDAO.getBuildingMainClass(0, 10,null);
 
             assertTrue("buildingmainclass.findAll list not equal to row count of table organization", rowCount == allItems.size());
 

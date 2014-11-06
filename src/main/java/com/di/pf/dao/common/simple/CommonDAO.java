@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface CommonDAO extends Count {
 
-    public List<ApplicantType> getApplicantType(Integer start, Integer limit);
+    public List<ApplicantType> getApplicantType(Integer start, Integer limit,String name);
 
-    public List<BuildingMainClass> getBuildingMainClass(Integer start, Integer limit);
+    public List<BuildingMainClass> getBuildingMainClass(Integer start, Integer limit,String name);
 }

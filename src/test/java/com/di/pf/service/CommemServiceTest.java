@@ -32,7 +32,7 @@ public class CommemServiceTest extends AbstractServiceTest {
 
         if (rowCount > 0) {
 
-            Result<List<ApplicantType>> allItems = commonService.getApplicantType(TEST_USERNAME, 0, 20);
+            Result<List<ApplicantType>> allItems = commonService.getApplicantType(TEST_USERNAME, 0, 20,null);
             //assertTrue("Organization.findAll list not equal to row count of table ttt_company", rowCount == allItems.getData().size());
 
         } else {

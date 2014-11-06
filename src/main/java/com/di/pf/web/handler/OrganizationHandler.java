@@ -13,6 +13,7 @@ import static com.di.pf.web.security.SecurityHelper.getSessionUser;
 
 import java.util.List;
 import javax.json.Json;
+import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
@@ -81,7 +82,16 @@ public class OrganizationHandler extends AbstractHandler {
     @RequestMapping(value = "/findAll", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
     public String findAll(HttpServletRequest request) {
+        String name = "";
+        String filter = request.getParameter("filter");
+        if (filter != null) {
+            logger.debug("filter=" + filter);
+            JsonArray jsonData = parseJsonArray(filter);
+            logger.debug("jsonData=" + jsonData.getJsonObject(0));
+    //JsonObject jsonData1 = parseJsonObject(request.getParameter("filter"));
+            //logger.debug("jsonData="+jsonData);
 
+        }
         Users sessionUser = getSessionUser(request);
         Integer start = Integer.parseInt(request.getParameter("start"));
         Integer limit = Integer.parseInt(request.getParameter("limit"));

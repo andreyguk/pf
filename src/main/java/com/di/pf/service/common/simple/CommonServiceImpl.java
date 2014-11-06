@@ -32,9 +32,9 @@ public class CommonServiceImpl extends AbstactService implements CommonService {
     
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
-    public Result<List<ApplicantType>> getApplicantType(String actionUser, Integer start, Integer limit) {
+    public Result<List<ApplicantType>> getApplicantType(String actionUser, Integer start, Integer limit,String name) {
         if (isValidUser(actionUser)) {            
-            return ResultFactory.getSuccessResult(commonDAO.getApplicantType(start, limit), commonDAO.getApplicantTypeCount());
+            return ResultFactory.getSuccessResult(commonDAO.getApplicantType(start, limit,name), commonDAO.getApplicantTypeCount());
         } else {
             return ResultFactory.getFailResult(USER_INVALID);
         }
@@ -42,9 +42,9 @@ public class CommonServiceImpl extends AbstactService implements CommonService {
     
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
-    public Result<List<BuildingMainClass>> getBuildingMainClass(String actionUser, Integer start, Integer limit) {
+    public Result<List<BuildingMainClass>> getBuildingMainClass(String actionUser, Integer start, Integer limit,String name) {
         if (isValidUser(actionUser)) {
-            return ResultFactory.getSuccessResult(commonDAO.getBuildingMainClass(start, limit), commonDAO.getBuildingMainClass());
+            return ResultFactory.getSuccessResult(commonDAO.getBuildingMainClass(start, limit,name), commonDAO.getBuildingMainClass());
         } else {
             return ResultFactory.getFailResult(USER_INVALID);
         }

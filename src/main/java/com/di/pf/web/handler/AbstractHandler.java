@@ -19,6 +19,7 @@ import javax.json.JsonWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.di.pf.util.JsonItem;
+import javax.json.JsonArray;
 
 /**
  *
@@ -130,6 +131,13 @@ public class AbstractHandler {
 
         JsonReader reader = Json.createReader(new StringReader(jsonString));
         return reader.readObject();
+
+    }
+    
+    protected JsonArray parseJsonArray(String jsonString) {
+
+        JsonReader reader = Json.createReader(new StringReader(jsonString));
+        return reader.readArray();
 
     }
 

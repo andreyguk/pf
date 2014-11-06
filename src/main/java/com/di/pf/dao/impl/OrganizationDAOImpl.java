@@ -28,6 +28,12 @@ public class OrganizationDAOImpl extends GenericDAOImpl<Organization, Integer> i
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public List<Organization> findAll(Integer start, Integer limit) {
+        /*CriteriaBuilder cb=em.getCriteriaBuilder();   
+         CriteriaQuery<ApplicantType> cq = cb.createQuery(ApplicantType.class);
+         Root<ApplicantType> applicantType = cq.from(ApplicantType.class);
+         cq.select(applicantType);
+         //cq.where(cb.equal(applicantType.get(ApplicantType_.code), 2));
+         TypedQuery<ApplicantType> query = em.createQuery(cq);*/
         TypedQuery<Organization> query = em.createNamedQuery("Organization.findAll", Organization.class);
         return query.setFirstResult(start).setMaxResults(limit).getResultList();
     }
