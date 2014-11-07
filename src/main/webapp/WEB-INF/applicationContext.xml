@@ -27,5 +27,7 @@
     <!-- Scan for Repository/Service annotations -->
     <context:component-scan base-package="com.di.pf.dao"/>
     <context:component-scan base-package="com.di.pf.service"/>
+    
+    <import resource="security.xml" />
         
 </beans>
