@@ -5,7 +5,7 @@
  */
 package com.di.pf.dao.common.simple;
 
-import com.di.pf.domain.common.ApplicantType;
+import com.di.pf.domain.common.*;
 import com.di.pf.domain.common.ApplicantType_;
 import com.di.pf.domain.common.BuildingMainClass;
 import java.util.List;
@@ -48,7 +48,7 @@ public class CommonDAOImpl implements CommonDAO {
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-    public List<BuildingMainClass> getBuildingMainClass(Integer start, Integer limit,String name) {
+    public List<BuildingMainClass> getBuildingMainClass(Integer start, Integer limit, String name) {
         TypedQuery<BuildingMainClass> query = em.createNamedQuery("BuildingMainClass.findAll", BuildingMainClass.class);
         return query.setFirstResult(start).setMaxResults(limit).getResultList();
     }
@@ -61,8 +61,41 @@ public class CommonDAOImpl implements CommonDAO {
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-    public Long getBuildingMainClass() {
+    public Long getBuildingMainClassCount() {
         return em.createNamedQuery("BuildingMainClass.countAll", Long.class).getSingleResult();
     }
 
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public List<Territory> getTerritory(Integer start, Integer limit, Integer territoryId, String fullname) {
+        TypedQuery<Territory> query;
+        query = em.createNamedQuery("Territory.findAll", Territory.class);
+        if (!fullname.isEmpty()) {
+            query = em.createNamedQuery("Territory.findByFullname", Territory.class).setParameter("fullname", fullname);
+        }
+        return query.getResultList();
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public Long getTerritoryCount() {
+        return em.createNamedQuery("Territory.countAll", Long.class).getSingleResult();
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public List<Roles> getUserRoles(Integer start, Integer limit, String name) {
+        TypedQuery<Roles> query;
+        query = em.createNamedQuery("Roles.findAll", Roles.class);
+        if (!name.isEmpty()) {
+            query = em.createNamedQuery("Roles.findByName", Roles.class).setParameter("name", name);
+        }
+        return query.getResultList();
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public Long getUserRolesCount() {
+        return em.createNamedQuery("Roles.countAll", Long.class).getSingleResult();
+    }
 }

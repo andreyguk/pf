@@ -13,5 +13,9 @@ public interface Count {
 
     public Long getApplicantTypeCount();
 
-    public Long getBuildingMainClass();
+    public Long getBuildingMainClassCount();
+
+    public Long getTerritoryCount();
+
+    public Long getUserRolesCount();
 }

@@ -5,6 +5,7 @@
  */
 package com.di.pf.dao;
 
+import com.di.pf.domain.UserRoles;
 import com.di.pf.domain.Users;
 import java.util.List;
 
@@ -14,9 +15,13 @@ import java.util.List;
  */
 public interface UsersDAO extends GenericDAO<Users, Integer> {
 
-    public List<Users> findAll();
+    public List<Users> findAll(Integer start, Integer limit);
 
     public Users findByUsernamePassword(String username, String password);
 
     public Users findByUsername(String username);
+
+    public List<UserRoles> getUserRoles(Integer userId);
+
+    public Long count();
 }

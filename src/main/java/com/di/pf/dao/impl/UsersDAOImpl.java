@@ -5,9 +5,9 @@
  */
 package com.di.pf.dao.impl;
 
-import java.io.Serializable;
 import com.di.pf.domain.Users;
 import com.di.pf.dao.UsersDAO;
+import com.di.pf.domain.UserRoles;
 
 /**
  *
@@ -33,10 +33,25 @@ public class UsersDAOImpl extends GenericDAOImpl<Users, Integer> implements User
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
-    public List<Users> findAll() {
+    public List<Users> findAll(Integer start, Integer limit) {
         TypedQuery<Users> query = em.createNamedQuery("Users.findAll", Users.class);
-        return query.getResultList();
+        return query.setFirstResult(start).setMaxResults(limit).getResultList();
 
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public List<UserRoles> getUserRoles(Integer userId) {
+        TypedQuery<UserRoles> query = em.createNamedQuery("UserRoles.findByUserId", UserRoles.class);
+        
+        return query.setParameter("usr", userId).getResultList();
+
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
+    public Long count() {
+        return em.createNamedQuery("Users.countAll", Long.class).getSingleResult();
     }
 
     /**
@@ -50,13 +65,19 @@ public class UsersDAOImpl extends GenericDAOImpl<Users, Integer> implements User
     public Users findByUsernamePassword(String username, String password) {
         List<Users> users = em.createNamedQuery("Users.findByUsername").setParameter("username", username).getResultList();
         return (users.size() == 1 ? users.get(0) : null);
+        //TypedQuery<Users> query = em.createNamedQuery("Users.findAll", Users.class);
+        //return query.getResultList().get(0);
+
     }
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public Users findByUsername(String username) {
-        List<Users> users = em.createNamedQuery("Users.findByUsername").setParameter("username", username).getResultList();
-        return (users.size() == 1 ? users.get(0) : null);
+        //List<Users> users = em.createNamedQuery("Users.findByUsername").setParameter("username", username).getResultList();
+        //return (users.size() == 1 ? users.get(0) : null);
+        TypedQuery<Users> query = em.createNamedQuery("Users.findAll", Users.class);
+        return query.getResultList().get(0);
+
     }
 
 }

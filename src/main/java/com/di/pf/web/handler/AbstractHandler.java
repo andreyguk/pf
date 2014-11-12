@@ -47,6 +47,23 @@ public class AbstractHandler {
         return toJsonString(builder.build());
     }
 
+    public static String getJsonSuccessData(List<? extends JsonItem> results) {
+
+        final JsonObjectBuilder builder = Json.createObjectBuilder();
+        builder.add("success", true);
+
+        final JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+
+        for (JsonItem ji : results) {
+
+            arrayBuilder.add(ji.toJson());
+        }
+
+        builder.add("data", arrayBuilder);
+
+        return toJsonString(builder.build());
+    }
+
     /**
      * Returns a JSON success data array in the format { success: true, data:
      * jsonData} where jsonData could be in the format [ {} , {} ...] for lists
@@ -133,7 +150,7 @@ public class AbstractHandler {
         return reader.readObject();
 
     }
-    
+
     protected JsonArray parseJsonArray(String jsonString) {
 
         JsonReader reader = Json.createReader(new StringReader(jsonString));

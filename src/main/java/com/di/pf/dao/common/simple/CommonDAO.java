@@ -5,8 +5,8 @@
  */
 package com.di.pf.dao.common.simple;
 
-import com.di.pf.domain.common.ApplicantType;
-import com.di.pf.domain.common.BuildingMainClass;
+import com.di.pf.domain.common.*;
+
 import java.util.List;
 
 /**
@@ -15,7 +15,12 @@ import java.util.List;
  */
 public interface CommonDAO extends Count {
 
-    public List<ApplicantType> getApplicantType(Integer start, Integer limit,String name);
+    public List<ApplicantType> getApplicantType(Integer start, Integer limit, String name);
 
-    public List<BuildingMainClass> getBuildingMainClass(Integer start, Integer limit,String name);
+    public List<BuildingMainClass> getBuildingMainClass(Integer start, Integer limit, String name);
+
+    public List<Territory> getTerritory(Integer start, Integer limit, Integer territoryId, String fullname);
+
+    public List<Roles> getUserRoles(Integer start, Integer limit, String name);
+
 }

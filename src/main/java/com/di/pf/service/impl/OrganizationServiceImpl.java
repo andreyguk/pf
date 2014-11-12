@@ -33,9 +33,6 @@ public class OrganizationServiceImpl extends AbstactService implements Organizat
     public Result<Organization> store(Integer idOrg, String companyName, String actionUser) {
         Users user = userDAO.findByUsername(actionUser);
 
-        if (!user.isAdmin()) {
-            return ResultFactory.getFailResult("USER_NOT_ADMIN");
-        }
         Organization organization;
 
         if (idOrg == null) {
@@ -60,11 +57,7 @@ public class OrganizationServiceImpl extends AbstactService implements Organizat
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
     public Result<Organization> remove(Integer id, String actionUser) {
-        Users user = userDAO.findByUsername(actionUser);
-
-        if (!user.isAdmin()) {
-            return ResultFactory.getFailResult("USER_NOT_ADMIN");
-        }
+        Users user = userDAO.findByUsername(actionUser);      
 
         if (id == null) {
 

@@ -5,13 +5,9 @@
  */
 package com.di.pf.service.common.simple;
 
-import com.di.pf.domain.*;
+import com.di.pf.domain.common.*;
 import com.di.pf.dao.common.simple.CommonDAO;
-import com.di.pf.domain.common.ApplicantType;
-import com.di.pf.domain.common.BuildingMainClass;
-import com.di.pf.dto.vo.Result;
-import com.di.pf.dto.vo.ResultFactory;
-import com.di.pf.service.OrganizationService;
+import com.di.pf.dto.vo.*;
 import com.di.pf.service.AbstactService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -22,32 +18,52 @@ import java.util.List;
 @Transactional
 @Service("commonService")
 public class CommonServiceImpl extends AbstactService implements CommonService {
-    
+
     @Autowired
     protected CommonDAO commonDAO;
-    
+
     public CommonServiceImpl() {
         super();
     }
-    
+
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
     @Override
-    public Result<List<ApplicantType>> getApplicantType(String actionUser, Integer start, Integer limit,String name) {
-        if (isValidUser(actionUser)) {            
-            return ResultFactory.getSuccessResult(commonDAO.getApplicantType(start, limit,name), commonDAO.getApplicantTypeCount());
-        } else {
-            return ResultFactory.getFailResult(USER_INVALID);
-        }
-    }
-    
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    @Override
-    public Result<List<BuildingMainClass>> getBuildingMainClass(String actionUser, Integer start, Integer limit,String name) {
+    public Result<List<ApplicantType>> getApplicantType(String actionUser, Integer start, Integer limit, String name) {
         if (isValidUser(actionUser)) {
-            return ResultFactory.getSuccessResult(commonDAO.getBuildingMainClass(start, limit,name), commonDAO.getBuildingMainClass());
+            return ResultFactory.getSuccessResult(commonDAO.getApplicantType(start, limit, name), commonDAO.getApplicantTypeCount());
         } else {
             return ResultFactory.getFailResult(USER_INVALID);
         }
     }
-    
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Override
+    public Result<List<BuildingMainClass>> getBuildingMainClass(String actionUser, Integer start, Integer limit, String name) {
+        if (isValidUser(actionUser)) {
+            return ResultFactory.getSuccessResult(commonDAO.getBuildingMainClass(start, limit, name), commonDAO.getBuildingMainClassCount());
+        } else {
+            return ResultFactory.getFailResult(USER_INVALID);
+        }
+    }
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Override
+    public Result<List<Territory>> getTerritory(String actionUser, Integer start, Integer limit, Integer id, String fullname) {
+        if (isValidUser(actionUser)) {
+            return ResultFactory.getSuccessResult(commonDAO.getTerritory(start, limit, id, fullname), commonDAO.getTerritoryCount());
+        } else {
+            return ResultFactory.getFailResult(USER_INVALID);
+        }
+    }
+
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+    @Override
+    public Result<List<Roles>> getUserRoles(String actionUser, Integer start, Integer limit, String name) {
+        if (isValidUser(actionUser)) {
+            return ResultFactory.getSuccessResult(commonDAO.getUserRoles(start, limit, name), commonDAO.getUserRolesCount());
+        } else {
+            return ResultFactory.getFailResult(USER_INVALID);
+        }
+    }
+
 }

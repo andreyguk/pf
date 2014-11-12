@@ -15,7 +15,11 @@ import java.util.List;
  */
 public interface CommonService {
 
-    public Result<List<ApplicantType>> getApplicantType(String actionUser,Integer start, Integer limit,String name);
+    public Result<List<ApplicantType>> getApplicantType(String actionUser, Integer start, Integer limit, String name);
 
-    public Result<List<BuildingMainClass>> getBuildingMainClass(String actionUser,Integer start, Integer limit,String name);
+    public Result<List<BuildingMainClass>> getBuildingMainClass(String actionUser, Integer start, Integer limit, String name);
+
+    public Result<List<Territory>> getTerritory(String actionUser, Integer start, Integer limit, Integer id, String fullname);
+
+    public Result<List<Roles>> getUserRoles(String actionUser, Integer start, Integer limit, String name);
 }

@@ -10,5 +10,8 @@
         <property name="URL" value="jdbc:postgresql://localhost:5432/pf"/>
         <property name="driverClass" value="org.postgresql.Driver"/>
     </jdbc-connection-pool>
-    <jdbc-resource enabled="true" jndi-name="pfD" object-type="user" pool-name="post-gre-sql_pf_postgresPool"/>    
+    <jdbc-resource enabled="true" jndi-name="pfDict" object-type="user" pool-name="post-gre-sql_pf_postgresPool"/>
+    <jdbc-resource enabled="true" jndi-name="pfMain" object-type="user" pool-name="post-gre-sql_pf_postgresPool"/>
+    <jdbc-resource enabled="true" jndi-name="jdbc/pfDict" object-type="user" pool-name="post-gre-sql_pf_postgresPool"/>
+    <jdbc-resource enabled="true" jndi-name="jdbc/pfmain" object-type="user" pool-name="post-gre-sql_pf_postgresPool"/>
 </resources>

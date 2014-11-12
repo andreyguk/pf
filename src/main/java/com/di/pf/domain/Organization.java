@@ -5,34 +5,41 @@
  */
 package com.di.pf.domain;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
+import com.di.pf.domain.common.OrgType;
+import com.di.pf.domain.common.TerritoryType;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 import javax.json.JsonObjectBuilder;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author avg
  */
 @Entity
-@Table(name = "model.organization")
+@Table(name = "main.organization")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Organization.findAll", query = "SELECT o FROM Organization o "),
+    @NamedQuery(name = "Organization.findAll", query = "SELECT o FROM Organization o"),
     @NamedQuery(name = "Organization.countAll", query = "SELECT count(o) FROM Organization o")})
 public class Organization extends AbstractEntity {
 
@@ -52,12 +59,19 @@ public class Organization extends AbstractEntity {
     @Size(min = 1, max = 250)
     @Column(name = "name")
     private String name;
+    @JoinColumn(name = "orgtype", referencedColumnName = "id")
+    @ManyToOne
+    private OrgType orgtype;
     @Size(max = 250)
     @Column(name = "branchcode")
     private String branchcode;
     @Size(max = 250)
     @Column(name = "organhead")
     private String organhead;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "location")
+    private int location;
     @Size(max = 250)
     @Column(name = "address")
     private String address;
@@ -85,19 +99,17 @@ public class Organization extends AbstractEntity {
     @Size(max = 250)
     @Column(name = "email")
     private String email;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "headorgan")
+    private List<Organization> organizationList;
+    @JoinColumn(name = "headorgan", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Organization headorgan;
 
     public Organization() {
     }
 
     public Organization(Integer id) {
         this.id = id;
-    }
-
-    public Organization(Integer id, String code, String name, boolean isdeleted) {
-        this.id = id;
-        this.code = code;
-        this.name = name;
-        this.isdeleted = isdeleted;
     }
 
     public Integer getId() {
@@ -124,6 +136,14 @@ public class Organization extends AbstractEntity {
         this.name = name;
     }
 
+    public OrgType getOrgtype() {
+        return orgtype;
+    }
+
+    public void setOrgtype(OrgType orgtype) {
+        this.orgtype = orgtype;
+    }
+
     public String getBranchcode() {
         return branchcode;
     }
@@ -138,6 +158,14 @@ public class Organization extends AbstractEntity {
 
     public void setOrganhead(String organhead) {
         this.organhead = organhead;
+    }
+
+    public int getLocation() {
+        return location;
+    }
+
+    public void setLocation(int location) {
+        this.location = location;
     }
 
     public String getAddress() {
@@ -204,10 +232,27 @@ public class Organization extends AbstractEntity {
         this.email = email;
     }
 
+    @XmlTransient
+    public List<Organization> getOrganizationList() {
+        return organizationList;
+    }
+
+    public void setOrganizationList(List<Organization> organizationList) {
+        this.organizationList = organizationList;
+    }
+
+    public Organization getHeadorgan() {
+        return headorgan;
+    }
+
+    public void setHeadorgan(Organization headorgan) {
+        this.headorgan = headorgan;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -220,10 +265,7 @@ public class Organization extends AbstractEntity {
             return false;
         }
         final Organization other = (Organization) obj;
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
@@ -233,7 +275,7 @@ public class Organization extends AbstractEntity {
 
     @Override
     public void addJson(JsonObjectBuilder builder) {
+        builder.add("id", id);
 
-        builder.add("id", id).add("name", name).add("orgCode", code);
     }
 }

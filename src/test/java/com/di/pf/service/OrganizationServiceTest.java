@@ -28,7 +28,7 @@ public class OrganizationServiceTest extends AbstractServiceTest {
     public void testFind() throws Exception {
 
         logger.debug("\nSTARTED testFind()\n");
-        Result<List<Organization>> allItems = organizationService.findAll(TEST_USERNAME, 10, 20);
+        Result<List<Organization>> allItems = organizationService.findAll(TEST_USERNAME, 0, 20);
 
         assertTrue(allItems.getData().size() > 0);
 
@@ -52,7 +52,7 @@ public class OrganizationServiceTest extends AbstractServiceTest {
     public void testFindAll() throws Exception {
 
         logger.debug("\nSTARTED testFindAll()\n");
-        int rowCount = countRowsInTable("model.organization");
+        int rowCount = countRowsInTable("main.organization");
 
         if (rowCount > 0) {
 
@@ -119,7 +119,7 @@ public class OrganizationServiceTest extends AbstractServiceTest {
     public void testRemove() throws Exception {
 
         logger.debug("\nSTARTED testRemove()\n");
-        Result<List<Organization>> ar1 = organizationService.findAll(TEST_USERNAME, 10, 20);
+        Result<List<Organization>> ar1 = organizationService.findAll(TEST_USERNAME, 0, 20);
         Organization c = ar1.getData().get(0);
 
         Result<Organization> ar = organizationService.remove(c.getId(), TEST_USERNAME);

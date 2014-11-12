@@ -7,6 +7,7 @@ package com.di.pf.service;
 
 import com.di.pf.dto.vo.Result;
 import com.di.pf.domain.Users;
+import com.di.pf.domain.UserRoles;
 import java.util.List;
 
 /**
@@ -24,7 +25,9 @@ public interface UsersService {
 
     public Result<Users> find(Integer id, String actionUser);
 
-    public Result<List<Users>> findAll(String actionUser);
+    public Result<List<Users>> findAll(String actionUser, Integer start, Integer limit);
+
+    public Result<List<UserRoles>> getUserRoles(Integer userId);
 
     public Result<Users> findByUsernamePassword(String username, String password);
 

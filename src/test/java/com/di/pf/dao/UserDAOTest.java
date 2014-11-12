@@ -27,11 +27,11 @@ public class UserDAOTest extends AbstractDAOTest {
     public void testFindAll() throws Exception {
 
         logger.debug("\nSTARTED testFindAll()\n");
-        int rowCount = countRowsInTable("model.users");
+        int rowCount = countRowsInTable("main.users");
 
         if (rowCount > 0) {
 
-            List<Users> allItems = usersDAO.findAll();
+            List<Users> allItems = usersDAO.findAll(0, 10);
             assertTrue("Users.findAll list not equal to row count of table organization", rowCount == allItems.size());
 
         } else {

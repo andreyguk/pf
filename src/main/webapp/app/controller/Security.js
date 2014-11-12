@@ -15,6 +15,19 @@ Ext.define('pf.controller.Security', {
     },
     processLoggedIn: function () {
         var me = this;
+       /* var roleName = "ADMIN_HEAD,SUPERVISOR_HEAD,OPERATOR";
+        pf.LoggedInUser = Ext.create('pf.model.system.User', {
+            id: '10',
+            fio: 'fio',
+            userName: "vasaja",
+            workplace: 10,
+            workplaceName: "fbi",
+            roleName: roleName.split(',')
+
+        });
+        Ext.globalEvents.fireEvent('aftervalidateloggedin');
+        return;*/
+
         Ext.Ajax.request({
             url: 'pf/security/checkauth',
             params: {

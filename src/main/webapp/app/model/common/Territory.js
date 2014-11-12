@@ -13,10 +13,10 @@ Ext.define('pf.model.common.Territory', {
 	proxy : {
 		type : 'baseAjax',
 		extraParams : {
-			classname : 'territory'
+			classname : 'Territory'
 		},
 		api : {
-			read : pf.system.Settings.protocol + pf.system.Settings.port + pf.system.Settings.ns + 'pf.proxy.common.Common.cls'
+			read: 'pf/company/findAll'
 		}
 	}
 
