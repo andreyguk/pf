@@ -24,14 +24,16 @@ public class UserInSessionInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        response.setHeader("Content-Type", "application/json; charset=UTF-8");
+
+        //response.setHeader("Content-Type", "application/json; charset=UTF-8");
+        response.setContentType("application/json;charset=UTF-8;");
         response.setCharacterEncoding("UTF-8");
-        logger.info("calling preHandle with url=" + request.getRequestURI());
+        
 
         Users sessionUser = getSessionUser(request);
 
         if (sessionUser == null) {
-            String json = "{\"success\":false,\"message\":\"Службова інформація!\",\"code\":\"\",\"data\":\"Час роботи  в ситемі автомати завершено!\",\"type\":\"autologout\"}";
+            String json = "{\"success\":false,\"type\":\"autologout\"}";
             response.getOutputStream().write(json.getBytes());
             //response.sendRedirect("security/login.html");
             return false;

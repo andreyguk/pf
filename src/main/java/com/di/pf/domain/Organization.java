@@ -7,6 +7,8 @@ package com.di.pf.domain;
 
 import com.di.pf.domain.common.OrgType;
 import com.di.pf.domain.common.TerritoryType;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -43,6 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Organization.countAll", query = "SELECT count(o) FROM Organization o")})
 public class Organization extends AbstractEntity {
 
+    static final SimpleDateFormat DATE_FORMAT_yyyyMMdd = new SimpleDateFormat("yyyyMMdd");
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -275,7 +278,9 @@ public class Organization extends AbstractEntity {
 
     @Override
     public void addJson(JsonObjectBuilder builder) {
-        builder.add("id", id);
+        builder.add("id", id).add("name", name).add("orgCode", code).add("orgTypeId", orgtype.getId()).add("orgTypeName", orgtype.getName())
+                .add("orgTypeCode", orgtype.getCode()).add("organHead", organhead).add("location", location).add("address", address)
+                ;//.add("certNumber", certnumber).add("certDate", certdate == null ? "" : DATE_FORMAT_yyyyMMdd.format(certdate));//.add("isDeleted", isdeleted);
 
     }
 }

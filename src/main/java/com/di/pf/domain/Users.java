@@ -266,7 +266,8 @@ public class Users extends AbstractEntity {
 
     @Override
     public void addJson(JsonObjectBuilder builder) {
-        builder.add("id", id).add("userName", username).add("fio", shortfio).add("workplace", workplace.getId()).add("workplaceName", workplace.getName()).add("roleName", getRoles().toString());
+        builder.add("id", id).add("userName", username).add("lastName", lastname).add("firstName", firstname).add("middleName", middlename)
+                .add("shortFio", shortfio).add("workplace", workplace.getId()).add("orgName", workplace.getName()).add("roleName", getRoles().toString());
 
     }
 

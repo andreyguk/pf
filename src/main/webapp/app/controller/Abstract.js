@@ -161,10 +161,19 @@ Ext.define('pf.controller.Abstract', {
         if (success) {
             if (request.operation.wasSuccessful()) {
             } else {
-me.showError(rawData.message + '_' + rawData.code + '<br/>' + rawData.data);
                 switch (rawData.type) {
                     case 'autologout':
-                        window.location.assign("/");
+                        Ext.Msg.show({
+                            title: errorType.info,
+                            msg: "Час роботи в системі було автоматично завершено!",
+                            buttons: Ext.MessageBox.OK,
+                            icon: Ext.MessageBox.INFO,
+                            fn: function (btn) {
+                                if (btn === 'yes') {
+                                    window.location.assign("/");
+                                }
+                            }
+                        });
                         break;
                     default :
                         me.showError(rawData.message + '_' + rawData.code + '<br/>' + rawData.data);

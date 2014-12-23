@@ -53,32 +53,13 @@ public class UserHandler extends AbstractHandler {
 
      }
      }*/
+    @RequestMapping(value = "/store", method = RequestMethod.POST, produces = {"application/json"})
+    @ResponseBody
+    public String store(@RequestParam(value = "data", required = true) String jsonData, HttpServletRequest request) {
+        logger.debug("jsonData="+jsonData);
+        return "";
+    }
 
-    /*@RequestMapping(value = "/store", method = RequestMethod.POST, produces = {"application/json"})
-     @ResponseBody
-     public String store(
-     @RequestParam(value = "data", required = true) String jsonData,
-     HttpServletRequest request) {
-
-     User sessionUser = getSessionUser(request);
-
-     JsonObject jsonObj = parseJsonObject(jsonData);
-
-     Result<Company> ar = companyService.store(
-     getIntegerValue(jsonObj.get("idCompany")),
-     jsonObj.getString("companyName"),
-     sessionUser.getUsername());
-
-     if (ar.isSuccess()) {
-
-     return getJsonSuccessData(ar.getData());
-
-     } else {
-
-     return getJsonErrorMsg(ar.getMsg());
-
-     }
-     }*/
     @RequestMapping(value = "/findAll", method = RequestMethod.POST, produces = {"application/json"})
     @ResponseBody
     public String findAll(HttpServletRequest request) {

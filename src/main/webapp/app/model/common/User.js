@@ -53,6 +53,7 @@ Ext.define('pf.model.common.User', {
         },
         api: {
             read: 'pf/user/findAll'
+      
 
         }
     }
