@@ -19,6 +19,7 @@ import javax.json.JsonWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.di.pf.util.JsonItem;
+import java.util.Iterator;
 import javax.json.JsonArray;
 
 /**
@@ -29,7 +30,24 @@ public class AbstractHandler {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public static String getJsonSuccessData(List<? extends JsonItem> results, Long count) {
+    public static String getJsonSuccessData(List<?> results, Long count) {
+
+        final JsonObjectBuilder builder = Json.createObjectBuilder();
+        builder.add("success", true);
+        builder.add("total", count);
+
+        final JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+
+      
+        for (Iterator<?> it = results.iterator(); it.hasNext();) {
+            JsonItem ji = (JsonItem) it.next();
+            arrayBuilder.add(ji.toJson());
+        }
+        builder.add("data", arrayBuilder);
+
+        return toJsonString(builder.build());
+    }
+    /*public static String getJsonSuccessData(List<? extends JsonItem> results, Long count) {
 
         final JsonObjectBuilder builder = Json.createObjectBuilder();
         builder.add("success", true);
@@ -45,7 +63,7 @@ public class AbstractHandler {
         builder.add("data", arrayBuilder);
 
         return toJsonString(builder.build());
-    }
+    }*/
 
     public static String getJsonSuccessData(List<? extends JsonItem> results) {
 
