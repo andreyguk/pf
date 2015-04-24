@@ -10,5 +10,8 @@ package com.di.pf.test;
  * @author avg
  */
 public class TestCls {
+    public static void main(String[] args) {
+        
+    }
     
 }
